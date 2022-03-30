@@ -100,10 +100,18 @@ function ganadorLoader(simb){
     document.getElementById("btnRes").setAttribute("style","visibility:visible;")
 }
 
+function hayempate(){
+    var flag = true;
+    for(i=0;i<9;i++){
+        if(marks[i] == ""){
+            flag = false;
+        }  
+    }
+    return flag;
+}
+
 function calcular(id){
-    
     if(estavacio() == false){
-        
         if(document.getElementById(id).innerHTML == "X"){
             detectCell("X");
         }else{
@@ -111,8 +119,16 @@ function calcular(id){
         }
         if(ganador == true){
             ganadorLoader(document.getElementById(id).innerHTML);
+        }else{
+            if(hayempate() == true){
+                document.getElementById("tablero").classList.add('tablaGanadora');
+                document.getElementById("btnRes").setAttribute("style","visibility:visible;")
+                document.getElementById("player").setAttribute("style","color:black;");
+                document.getElementById("player").innerHTML = "EMPATE";
+            }
         }
     }
+
 }
 
 function marcar(id,cid){
